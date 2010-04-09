@@ -87,16 +87,28 @@ class MemorizationTest < Test::Unit::TestCase
 
   describe "#study" do
     context "given a grade of 0" do
-      setup do
+      should "return a repetition of 1" do
         @of_matrix = Memfunc::OFMatrix.new
         @m = Memfunc::Memorization.new(
           :grade => 0, :efactor => 2.5, :of_matrix => @of_matrix, :repetition => 0
         )
-      end
 
-      should "return a repetition of 1" do
         assert_equal 1, @m.study[:repetition]
       end
+      
+      context "given all the efactors" do
+        should "return the correct of_matrix value" do
+          Memfunc::Memorization::EFACTORS.each do |efactor|
+
+            @of_matrix = Memfunc::OFMatrix.new
+            @m = Memfunc::Memorization.new(
+              :grade => 0, :efactor => efactor, :of_matrix => @of_matrix, :repetition => 0
+            )
+            assert_equal @of_matrix[1, efactor], @m.study[:interval]
+          end
+        end
+      end
+
     end
   end
 end
