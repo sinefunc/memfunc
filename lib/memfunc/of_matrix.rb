@@ -1,6 +1,5 @@
 module Memfunc
   class OFMatrix
-    
     def initialize
       @matrix = [
         [  4,   4,   4,   4,   4,   4,   4,   4,   4,   4,   4,   4,   4],
