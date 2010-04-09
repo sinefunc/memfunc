@@ -29,5 +29,18 @@ module Memfunc
         { :repetition => 1, :interval => @of_matrix[1, @efactor] } 
       end
     end
+
+    def compute_interval
+      n = @repetition + 1
+      
+      new_interval = @of_matrix[n, @efactor]
+      last_ofactor_used = new_interval
+      
+      (n - 1).downto(1) do |x|
+        new_interval = new_interval * @of_matrix[x, @efactor]
+      end
+      
+      { :interval => new_interval.round, :last_ofactor_used => last_ofactor_used }
+    end
   end
 end

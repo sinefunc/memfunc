@@ -108,7 +108,29 @@ class MemorizationTest < Test::Unit::TestCase
           end
         end
       end
+    end
+  end
 
+  describe "#compute_interval" do
+    setup do
+      @pairs_and_intervals = {
+        [1, 2.5] => 10,
+        [2, 2.2] => 19,
+        [3, 2.0] => 32,
+        [4, 1.8] => 42,
+        [5, 1.6] => 42,
+      }
+    end
+
+    should "return the canned responses" do
+      @pairs_and_intervals.each do |(repetition, efactor), interval|
+        @of_matrix = Memfunc::OFMatrix.new
+        @m = Memfunc::Memorization.new(
+          :grade => 0, :efactor => efactor, :of_matrix => @of_matrix, :repetition => repetition
+        )
+        assert_equal interval, @m.compute_interval[:interval]
+        assert_equal efactor,  @m.compute_interval[:last_ofactor_used]
+      end
     end
   end
 end
