@@ -1,6 +1,6 @@
 = memfunc
 
-Description goes here.
+Memorization engine
 
 == Note on Patches/Pull Requests
  
