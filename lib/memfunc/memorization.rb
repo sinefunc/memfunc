@@ -1,12 +1,13 @@
 module Memfunc
   class Memorization
     EFACTORS = [1.3, 1.4, 1.5, 1.6, 1.7, 1.8, 1.9, 2.0, 2.1, 2.2, 2.3, 2.4, 2.5]
+    GRADES   = (0..5)
 
     attr_accessor :grade, :of_matrix, :efactor, :repetition
 
     def initialize(attrs = {})
-      unless attrs[:grade] and (0..5).include?(attrs[:grade])
-        raise ArgumentError, "Grade must be 0..5"
+      if not GRADES.include?(attrs[:grade])
+        raise ArgumentError, "Grades must be in #{GRADES.inspect}"
       end
 
       unless attrs[:of_matrix].is_a?(Memfunc::OFMatrix)
@@ -17,11 +18,10 @@ module Memfunc
         raise ArgumentError, ":efactor is not within #{EFACTORS.inspect}"  
       end
       
-      unless attrs[:repetition].is_a?(Fixnum)
-        raise TypeError, ":repetition should be an Integer" 
-      end
-
-      attrs.each { |k, v| send("#{k}=", v) }
+      @grade      = attrs[:grade]
+      @of_matrix  = attrs[:of_matrix]
+      @efactor    = attrs[:efactor]
+      @repetition = Integer(attrs[:repetition])
     end
 
     def study

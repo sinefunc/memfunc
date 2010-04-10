@@ -70,10 +70,9 @@ class MemorizationTest < Test::Unit::TestCase
   end
 
   context "given the repetition is '1'" do
-    should "raise a TypeError" do
-      assert_raise TypeError do
-        memorization(:repetition => '1')
-      end
+    should "have a repetition equal to an int 1" do
+      @memorization = memorization(:repetition => '1')
+      assert_equal 1, @memorization.repetition
     end
   end
 
