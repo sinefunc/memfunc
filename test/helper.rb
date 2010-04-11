@@ -1,6 +1,6 @@
 require 'rubygems'
 require 'test/unit'
-require 'contest'
+require File.dirname(__FILE__) + '/../vendor/contest/lib/contest'
 
 $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
 $LOAD_PATH.unshift(File.dirname(__FILE__))
